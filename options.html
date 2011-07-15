@@ -1,0 +1,54 @@
+<html>
+<head><title>Option de recherche Cnrtl</title></head>
+<script type="text/javascript">
+
+// Saves options to localStorage.
+function save_options() {
+  var optionsInput = document.getElementsByTagName("input");
+  for (var i = 0; i < optionsInput.length; i++) {
+    setPref(optionsInput[i].id,optionsInput[i].checked);
+  }
+}
+
+// Restores select box state to saved value from localStorage.
+function restore_options() {
+  var optionsInput = document.getElementsByTagName("input");
+  for (var i = 0; i < optionsInput.length; i++) {
+    optionsInput[i].checked=getPref(optionsInput[i].id);
+  }
+}
+
+function setPref(key, value) {
+  var prefs = {};
+  if (localStorage.prefs) {
+    prefs = JSON.parse(localStorage.prefs);
+  }
+  prefs[key] = value;
+  localStorage.prefs = JSON.stringify(prefs);
+}
+
+function getPref(key) {
+  if (!localStorage.prefs) {
+    return undefined;
+  }
+  var prefs = JSON.parse(localStorage.prefs);
+  return prefs[key];
+}
+
+</script>
+
+<body onload="restore_options()">
+
+<b>Option du menu de recherche Cnrtl :</b><br />
+<input type="checkbox" id="item_morphologie"> : Morphologie<br />
+<input type="checkbox" id="item_lexicographie"> : Définition (lexicographie)<br />
+<input type="checkbox" id="item_etymologie"> : Etymologie<br />
+<input type="checkbox" id="item_synonymie"> : Synonymie<br />
+<input type="checkbox" id="item_antonymie"> : Antonymie<br />
+<input type="checkbox" id="item_proxemie"> : Proxémie<br />
+<input type="checkbox" id="item_concordance"> : Concordance<br />
+
+<br />
+<button onclick="save_options()">Save</button>
+</body>
+</html>

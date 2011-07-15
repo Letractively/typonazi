@@ -1,0 +1,17 @@
+{
+  "name": "Typonazi",
+  "description": "Ajoute au menu contextuel de Chrome une option pour ajouter des caractères typographiques français essentiels : — « » À É",
+  "version": "0.1",
+  "permissions": ["contextMenus","tabs"],
+  "options_page": "options.html",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon-48.png"
+   },
+   "background_page": "background.html",
+   "content_scripts": [{
+      "js": [ "content-typonazi.js" ],
+      "matches": [ "http://*/*", "https://*/*" ],
+      "run_at": "document_start"
+   }]
+}
